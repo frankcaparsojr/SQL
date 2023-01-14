@@ -72,6 +72,10 @@ SELECT State, Winner FROM superbowls WHERE Winner_Pts >40 AND Loser_Pts <20 ORDE
 
 SELECT State, Winner FROM superbowls WHERE Winner_Pts >40 OR Loser_Pts <20 ORDER BY Winner;
 
+SELECT Date, SB, MVP FROM superbowls WHERE Winner_Pts >20 ORDER BY Date;
+
 SELECT * FROM superbowls WHERE Winner IN ("Green Bay Packers", "Kansas City Chiefs", "New York Jets") ORDER BY Date;
+
+SELECT Loser, SUM(Loser_Pts) AS Total_Loser_Pts FROM superbowls GROUP BY Loser ORDER BY Total_loser_pts;
 
 SELECT Winner, SUM(Winner_Pts) AS total_Winner_Pts FROM superbowls GROUP BY Winner HAVING total_Winner_Pts < 65;
