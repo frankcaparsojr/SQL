@@ -59,28 +59,33 @@ VALUES
 SELECT *
 FROM fortune_companies;
 
+-- How many companies have more than 50,000 employees
 SELECT company_name, employees
 FROM fortune_companies
 WHERE employees >=50000
 ORDER BY employees DESC;
 
+-- What companies had revenue more than 100 billion, organized by the industry they are in
 SELECT company_name, industry, revenue
 FROM fortune_companies
 WHERE revenue >=100.0
 GROUP BY industry
 ORDER BY revenue DESC;
 
+--What companies had the highest tenure percentage where they was at least 75,000 or more employees
 SELECT company_name
 ,ROUND(avg_employee_tenure*100) as avg_tenure_percent
 FROM fortune_companies
 WHERE employees >=75000
 ORDER BY avg_tenure_percent DESC;
 
+--How many companies offer more than 20 days of PTO
 SELECT company_name, SUM(paid_time_off_days) as pto_days
 FROM fortune_companies
 GROUP BY company_name
 HAVING pto_days >20;
 
+--What companies are in the top 1%, 3%, and 5% on this list, organized by what industry they are in
 SELECT COUNT(*), company_name, industry,
 CASE WHEN revenue >=300 THEN "Top 1%"
 WHEN revenue >=250 THEN "Top 3%"
@@ -90,6 +95,7 @@ FROM fortune_companies
 GROUP BY industry
 ORDER BY top_ten_percent;
 
+--What companies are considered family friendly based on whether or not they offer healthcare benefits
 SELECT company_name,
 CASE WHEN healthcare_benefits =1 THEN "yes"
 ELSE "=0" END AS "family_oriented"
