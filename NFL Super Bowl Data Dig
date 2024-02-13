@@ -1,6 +1,6 @@
 
 CREATE TABLE superbowls(
-  Date      TEXT PRIMARY KEY,
+  Date       TEXT,
   SB         TEXT,
   Winner     TEXT,
   Winner_Pts INTEGER,
