@@ -55,3 +55,43 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+
+SELECT *
+FROM fortune_companies;
+
+SELECT company_name, employees
+FROM fortune_companies
+WHERE employees >=50000
+ORDER BY employees DESC;
+
+SELECT company_name, industry, revenue
+FROM fortune_companies
+WHERE revenue >=100.0
+GROUP BY industry
+ORDER BY revenue DESC;
+
+SELECT company_name
+,ROUND(avg_employee_tenure*100) as avg_tenure_percent
+FROM fortune_companies
+WHERE employees >=75000
+ORDER BY avg_tenure_percent DESC;
+
+SELECT company_name, SUM(paid_time_off_days) as pto_days
+FROM fortune_companies
+GROUP BY company_name
+HAVING pto_days >20;
+
+SELECT COUNT(*), company_name, industry,
+CASE WHEN revenue >=300 THEN "Top 1%"
+WHEN revenue >=250 THEN "Top 3%"
+WHEN revenue >=150 THEN "Top 5%"
+ELSE "Under 150" END AS "top_ten_percent"
+FROM fortune_companies
+GROUP BY industry
+ORDER BY top_ten_percent;
+
+SELECT company_name,
+CASE WHEN healthcare_benefits =1 THEN "yes"
+ELSE "=0" END AS "family_oriented"
+FROM fortune_companies
+WHERE industry="Technology";
